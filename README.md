@@ -49,7 +49,7 @@ If you want to change the port as by default the app will run on port **5000**, 
 flask --app main.py run --port 5001
 ```  
 
-### If for any reason you cannot run the app, follow this guide:
+### ISSUES/ERRORS - If for any reason you cannot run the app, follow this guide:
 1. Make sure that you have activated the virtual environment `venv`
 2.  Make sure the packages are installed and then run the command to run the app.
 3. If you still have issues and cannot run it, open a Terminal as Administrator, navigate to the folder and then try to run it.
