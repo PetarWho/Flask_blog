@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+  /* Ensure all post images have a consistent size */
+  .post-img-container {
+    height: 200px;
+    /* Set a fixed height for the image container */
+    overflow: hidden;
+  }
+
+  .post-img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Crop the image to fill the container */
+  }
+
+  .plus-icon {
+    font-size: 4rem;
+  }
+
+  .newBtn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+  }
+</style>
+
+<div class="row">
+  <h1 class="text-center">Top Articles</h1>
+  {% for post in posts %}
+  <div class="col-md-4 mb-4">
+    <div class="card h-100">
+      <a href="{{ url_for('main.post_detail', post_id=post.id) }}" class="text-decoration-none text-dark">
+
+        <div class="post-img-container">
+          {% if post.cover_image %}
+          <img src="{{ url_for('static', filename='images/' + post.cover_image) }}" class="card-img-top"
+            alt="{{ post.title }}">
+          {% else %}
+          <img src="{{ url_for('static', filename='no_image.jpg') }}" class="card-img-top" alt="No Image Available">
+          {% endif %}
+        </div>
+        <div class="card-body position-relative">
+          <div class="text-dark mb-2">
+            <small>
+              {%if post.views_count == 1 %}
+              <i class="bi bi-eye"></i> {{ post.views_count }} view
+              {% else %}
+              <i class="bi bi-eye"></i> {{ post.views_count }} views
+              {% endif %}
+            </small>
+          </div>
+          <div class="pb-1">
+            <h5 class="card-title">{{ post.title }}</h5>
+            <p class="card-text pb-0 mb-1">
+              <small class="text-muted">
+                By <strong>{{ post.author.username if post.author else 'Unknown' }}</strong> on {{
+                post.created_at.strftime('%b %d, %Y') }}
+              </small>
+            </p>
+
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+<a href="{{ url_for('main.new_post') }}" class="text-decoration-none text-success rounded-circle newBtn">
+  <i class="bi bi-plus-circle-fill plus-icon"></i>
+</a>
+{% endblock %}

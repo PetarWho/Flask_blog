@@ -1,0 +1,21 @@
+[
+    {
+      "id": 1,
+      "title": "Python Web development",
+      "subtitle": "Creating a Webapp using flask",
+      "author": "Nathan Chiche",
+      "date": "December 27, 2022",
+      "content": "Hi ! Today we will go over quickly starting a Flask application on a Mac. We will go over 4 simple steps soon after you have all the required installations.\n\nRequirements:\n- Homebrew — A way to help in installations\n- Python 3 — A Programming language\n- Virtualenv — A tool to create isolated Python environments. The problem being addressed is dependencies and versions of those dependencies.\n\nRequirement installation:\n\nHomebrew:\n$ /bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)\"\n\nPython 3:\n$ brew install python3\n\nVirtualenv:\n$ pip install virtualenv\n\nBuilding the Web App:\nTo start building the web app make sure you have completed everything above including activating a new virtual environment for your project file.\n\nLet's go ahead and create a folder in terminal and activate our virtual environment:\n$ mkdir flask_hello_world\n$ cd flask_hello_world\n$ virtualenv flask_hello_world\n$ source ~/flask_hello_world/env/bin/activate\n\n1. Install Flask:\n> (flask_hello_world) $ pip install flask\n\n2. Create a new package called app and file __init__.py:\n> (flask_hello_world) $ mkdir app\n> (flask_hello_world) $ touch app/__init__.py\n\nAdd the following code to the __init__.py in the app package:\n\n```python\nfrom flask import Flask\n\napp = Flask(__name__)\n\nfrom app import routes\n\nif __name__ == \"__main__\":\n    app.run(debug=True)\n```\n\n3. Create a routes module:\n$ (flask_hello_world) $ touch app/routes.py\n\nAdd the following view function to the new routes.py file:\n\n```python\nfrom app import app\n\n@app.route('/')\n@app.route('/index')\ndef index():\n    return \"Hello, World!\"\n```\n\n4. Create a run.py file:\n$ (flask_hello_world) $ touch run.py\n\nAdd the following to run.py to define the application instance and import it:\n\n```python\n# run.py\nfrom app import app\n```\n\nDirectory structure should look like this:\n\n```\n├── flask_hello_world\n│   ├── app\n│   │   ├── __init__.py\n│   │   └── routes.py\n│   └── run.py\n```\n\nBefore running the app, set the FLASK_APP environment variable and enable debugging:\n\n(flask_hello_world) $ export FLASK_APP=run.py\n(flask_hello_world) $ export FLASK_DEBUG=1\n\nRun the application:\n(flask_hello_world) $ flask run\n\nStop the server by pressing Ctrl-C\n\nSave your dependencies to a requirements.txt file:\n(flask_hello_world) $ pip freeze > requirements.txt\n\nFinal project structure:\n\n```\n├── flask_hello_world\n│   ├── app\n│   │   ├── __init__.py\n│   │   └── routes.py\n│   ├── requirements.txt\n│   └── run.py\n```\n\n🎉 Congratulations on building your first Flask app!!!",
+      "image": "images/flask-post.png"
+    },
+    {
+      "id": 2,
+      "title": "Exploring Flask for Web Development",
+      "subtitle": "A deep dive into Flask fundamentals",
+      "author": "Jane Smith",
+      "date": "March 16, 2025",
+      "content": "Flask is a lightweight yet powerful framework. In this post, we explore its features and integrations.",
+      "image": "images/post2.jpg"
+    }
+  ]
+  
