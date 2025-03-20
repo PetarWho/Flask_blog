@@ -33,3 +33,5 @@ If you want to change the port as by default the app will run on port **5000**, 
 ```bash
 flask --app main.py run --port 5001
 ```  
+
+## Enjoy 🎉🚀
