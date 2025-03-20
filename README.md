@@ -8,6 +8,7 @@ You will also need **Python** installed on your machine.
 
 
 ## Setup:
+1. Packages
 All required Python packages are listed in `requirements.txt` file, and all packages can simply be installed by following these steps:
 - Open a Terminal in the project folder
 - Run this command:
@@ -15,6 +16,7 @@ All required Python packages are listed in `requirements.txt` file, and all pack
 pip install -r ./requirements.txt
 ```
 
+2. Environment Variables
 > IMPORTANT: You will have to create a `.env` file (or rename the `.env.example` file to `.env`)
 
 Inside the `.env` file you will have to enter your database credentials in order to establish connection, and also enter a *SECRET_KEY* which can be randomly generated or just typed by hand.
