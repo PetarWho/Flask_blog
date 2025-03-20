@@ -17,12 +17,12 @@ python -m venv venv
 ```
 - Now activate the virtual environment so that packages are encapsulated and associate with this project only (this way you will not install the packages on your machine but only in this project inside the `venv folder`. To activate it, run this command in the terminal:
 
-  - For WINDOWS:
+> For WINDOWS:
 ```bash
 venv\Scripts\activate
 ```
 
-  - For LINUX/MAC:
+> For LINUX/MAC:
 ```bash
 source venv/bin/activate
 ```
