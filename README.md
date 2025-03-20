@@ -51,8 +51,8 @@ flask --app main.py run --port 5001
 
 ### ISSUES/ERRORS - If for any reason you cannot run the app, follow this guide:
 1. Make sure that you have activated the virtual environment `venv`
-2.  Make sure the packages are installed and then run the command to run the app.
-3. If you still have issues and cannot run it, open a Terminal as Administrator, navigate to the folder and then try to run it.
+2.  Make sure the packages are installed and then execute the command to run the app.
+3. If you still have issues and cannot run it, open a Terminal as Administrator, navigate to the folder and then try to execute the command.
 4. And as final option, instead of using `flask --app main.py run` try running it using `python main.py`
 
 ## Enjoy 🎉🚀
