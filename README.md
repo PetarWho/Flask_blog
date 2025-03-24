@@ -1,25 +1,34 @@
 ## Description
 This is a simple **Flask** Blog project.
+
 - You can login or create an account.
+
   ![image](https://github.com/user-attachments/assets/3b174625-f888-4f3e-9d1f-4d2e8c32b5a6)
 
 - While logged in, you can see all the articles that have been created on the app.
+
   ![image](https://github.com/user-attachments/assets/7f0804de-fb24-4f42-940f-7035a6ffcb94)
 
 - You can read existing articles.
+
   ![image](https://github.com/user-attachments/assets/4b757c97-984c-499b-82e3-d6dd17aca248)
 
 - You can create a new post.
+
   ![image](https://github.com/user-attachments/assets/2c014e5c-a7c8-4e1c-b639-3d25188b0456)
 
 - When you create a post, you can edit or delete it.
+
   ![image](https://github.com/user-attachments/assets/cec99628-a288-497e-a076-8d5c326b3c8c)
 
 - Each article has views count - measuring your post's performance (how many people have viewed your post).
-![image](https://github.com/user-attachments/assets/e7d0903a-b247-48ca-8ad8-7e4ed0c12bd5)
+
+  ![image](https://github.com/user-attachments/assets/e7d0903a-b247-48ca-8ad8-7e4ed0c12bd5)
 
 - You get messages for successful operations or errors.
+
   ![image](https://github.com/user-attachments/assets/c2d68731-5e40-4670-9bd9-c465fb98f554)
+
 
 ---
 
