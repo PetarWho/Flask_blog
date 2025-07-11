@@ -1,0 +1,257 @@
+body {
+    min-height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+main.container {
+    padding-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.flash-message {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1050;
+    margin-bottom: 1rem;
+}
+
+footer {
+    background-color: var(--tertiary-background);
+    color: var(--text-normal);
+}
+
+footer p {
+    margin-bottom: 0.5rem;
+}
+
+footer a img {
+    max-width: 300px;
+    transition: transform 0.3s ease;
+}
+
+footer a img:hover {
+    transform: scale(1.05);
+}
+
+main.container {
+    /* Or whatever selector wraps your page content */
+    flex: 1 0 auto; /* allow it to grow and fill space */
+}
+
+.navbar {
+    border-bottom: 2px solid var(--tertiary-background);
+}
+
+.nav-item {
+    margin: 0.7rem 0;
+}
+
+.nav-link{
+    color:var(--text-normal);
+    font-size: var(--size-4-5);
+}
+
+.navbar-brand{
+    margin:0;
+    color:var(--text-normal);
+    font-size: var(--size-6);
+}
+.navbar-brand:hover, .nav-link:hover{
+    color:var(--text-normal-hover);
+}
+
+.post-img-container {
+    height: 200px;
+    overflow: hidden;
+}
+
+.post-img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.plus-icon {
+    font-size: 4rem;
+}
+
+.newBtn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}
+
+.card {
+    background-color: var(--secondary-background);
+}
+
+.card-title, .form-label {
+    color: var(--text-normal) !important;
+}
+
+.card-text,
+.text-muted {
+    color: var(--text-muted);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+#toc{
+    border-right: 1px solid var(--quaternary-background);
+}
+
+/* Reset list styles */
+#toc ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    margin-right:10px;
+}
+
+/* Each level indents further */
+#toc .toc-level-1 {
+    margin-left: 0;
+}
+#toc .toc-level-1 a{
+    color: var(--accent-1);
+}
+
+#toc .toc-level-2 {
+    margin-left: 0.75rem;
+}
+#toc .toc-level-2 a{
+    color: var(--accent-2);
+}
+
+#toc .toc-level-3 {
+    margin-left: 1.5rem;
+}
+#toc .toc-level-3 a{
+    color: var(--accent-3);
+}
+
+#toc .toc-level-4 {
+    margin-left: 2.25rem;
+}
+#toc .toc-level-4 a{
+    color: var(--accent-4);
+}
+
+#toc .toc-level-5 {
+    margin-left: 3rem;
+}
+#toc .toc-level-5 a{
+    color: var(--accent-5);
+}
+
+#toc .toc-level-6 {
+    margin-left: 3.75rem;
+}
+#toc .toc-level-6 a{
+    color: var(--accent-6);
+}
+
+/* Link styling to match Obsidian */
+#toc a {
+    display: block;
+    color: var(--external-link);
+    text-decoration: none;
+    padding: 0.1em 0;
+}
+#toc a:hover {
+    text-decoration: underline;
+}
+
+.toc-header{
+    color: var(--text-normal);
+    font-size: var(--size-6);
+}
+
+.modal-content, .modal-header, .modal-body, .modal-footer{
+    background-color: var(--quaternary-background) !important;
+}
+
+.modal-header{
+    color: var(--accent-2);
+    font-size: var(--size-6);
+}
+
+#deleteModalLabel{
+    margin: 0;
+}
+
+.form-control, .form-control:focus{
+    background-color: var(--quaternary-background) !important;
+    color:var(--text-normal)
+}
+
+.form-control{
+    border-color: var(--tertiary-background);
+}
+
+.form-control::placeholder{
+    color:var(--text-muted)
+}
+
+input[type="file"]::file-selector-button{
+    background-color: var(--text-normal) !important;
+    color: var(--tertiary-background) !important;
+}
+
+.tooltip {
+    position: relative;
+  }
+  
+  /* Tooltip text */
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+   
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+  }
+  
+  /* Show the tooltip text when you mouse over the tooltip container */
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+  }
+
+  .back-to-top-btn {
+    color: var(--text-normal);
+    background-color: var(--quaternary-background);
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    display: none;        /* hidden until scrolled */
+    z-index: 1000;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.75rem;
+    font-size: 1rem;
+    opacity: 0.8;
+    transition: opacity 0.2s ease;
+  }
+  
+  #back-to-top:hover {
+    opacity: 1;
+  }
+  
+  .text-normal{
+    color:var(--text-normal);
+  }

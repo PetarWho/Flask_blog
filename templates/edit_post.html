@@ -19,7 +19,7 @@
               <label for="cover_image" class="form-label">Cover Image</label>
               <input type="file" id="cover_image" name="cover_image" class="form-control">
               {% if post.cover_image %}
-                <img src="{{ url_for('static', filename='images/' + post.cover_image) }}" alt="Cover Image" class="img-fluid mt-3">
+                <img src="{{ url_for('static', filename='images/' + post.id + '/' + post.cover_image) }}" alt="Cover Image" class="img-fluid mt-3">
               {% endif %}
             </div>
             <div class="d-grid">

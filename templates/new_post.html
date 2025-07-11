@@ -3,7 +3,7 @@
 <div class="container my-5">
   <div class="row justify-content-center">
     <div class="col-md-8 col-lg-6">
-      <div class="card shadow-sm">
+      <div class="card shadow-sm edit-box">
         <div class="card-body">
           <h1 class="card-title text-center mb-4">Create New Post</h1>
           <form method="post" enctype="multipart/form-data">
@@ -12,8 +12,21 @@
               <input type="text" class="form-control" id="title" name="title" required>
             </div>
             <div class="mb-3">
-              <label for="content" class="form-label">Content (Markdown supported)</label>
+              <label for="content" class="form-label">Content (Markdown format)</label>
               <textarea class="form-control" id="content" name="content" rows="10" required></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="images" class="form-label text-decoration-underline" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="If you have any images in your Markdown, upload ALL of them with the same name here">
+                Attach images
+              </label>
+              <input
+                type="file"
+                class="form-control"
+                id="images"
+                name="images"
+                multiple
+                accept="image/*"
+              >
             </div>
             <div class="mb-3">
               <label for="cover_image" class="form-label">Cover Image (optional)</label>

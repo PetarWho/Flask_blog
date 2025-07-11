@@ -1,58 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="theme-dark markdown-preview-view callout markdown-source-view cm-s-obsidian view-content">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{ title }} - Medium</title>
+  <title>{{ title }} - Wiki</title>
   <!-- Bootstrap CSS CDN -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/obsidian.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
   <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
-  <style>
-    /* Custom Styles */
-    body {
-      background-color: #f8f9fa;
-    }
-
-    main.container {
-      margin-top: 2rem;
-      margin-bottom: 2rem;
-    }
-
-    .flash-message {
-      position: fixed;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 1050;
-      margin-bottom: 1rem;
-    }
-
-    footer {
-      background-color: #343a40;
-      color: #fff;
-    }
-
-    footer p {
-      margin-bottom: 0.5rem;
-    }
-
-    footer a img {
-      max-width: 300px;
-      transition: transform 0.3s ease;
-    }
-
-    footer a img:hover {
-      transform: scale(1.05);
-    }
-  </style>
 </head>
 
-<body>
+<body class="theme-dark body">
   <!-- Include the navbar component -->
   {% include 'navbar.html' %}
-
   <!-- Main content area -->
   <main class="container position-relative">
     {% with messages = get_flashed_messages(with_categories=true) %}
@@ -70,13 +33,7 @@
   <!-- Footer -->
   <footer class="py-4">
     <div class="container text-center">
-      <p>This website uses real posts from Medium.com</p>
-      <p>This project is for educational purposes and non-commercial use.</p>
-      <a href="https://medium.com" target="_blank" rel="noopener">
-        <img width=500 src="https://media.itsnicethat.com/original_images/COLLINS_MEDIUM_00.gif" class="img-fluid"
-          alt="Medium Logo">
-      </a>
-    </div>
+      <p class="m-0">Built with ❤︎ by Petar Penev</p>
   </footer>
 
   <!-- Bootstrap JS Bundle -->
@@ -105,6 +62,68 @@
         });
       }, 2000);
     });
+  </script>
+
+  <script>
+    // If the OS prefers dark, add the class before the page renders:
+      document.documentElement.classList.add('theme-dark');
+  </script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const container = document.querySelector('.markdown-preview-view');
+    if (!container) return;
+  
+    const headings = container.querySelectorAll('h1, h2, h3, h4, h5, h6');
+    if (headings.length === 0) return;
+  
+    const toc = document.getElementById('toc');
+    let html = '<ul>';
+  
+    headings.forEach(h => {
+      // 1) Ensure each heading has an ID
+      if (!h.id) {
+        h.id = h.textContent
+                .trim()
+                .toLowerCase()
+                .replace(/[^a-z0-9]+/g, '-')
+                .replace(/(^-|-$)/g, '');
+      }
+      // 2) Grab its level (1–6)
+      const lvl = parseInt(h.tagName.charAt(1));
+      // 3) Render a <li> with a class for indentation
+      html += `<li class="toc-level-${lvl}">
+        <a href="#${h.id}">${h.textContent.trim()}</a>
+      </li>`;
+    });
+  
+    html += '</ul>';
+    toc.innerHTML = html;
+  });
+  </script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const btn = document.getElementById('back-to-top');
+      const showAfter = 200;  // px scrolled before showing
+
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > showAfter) {
+          btn.style.display = 'block';
+        } else {
+          btn.style.display = 'none';
+        }
+      });
+
+      btn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+  </script>
+
+  <script>
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+    const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
   </script>
 </body>
 

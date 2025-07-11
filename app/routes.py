@@ -1,10 +1,12 @@
 import os
+import uuid
 from werkzeug.utils import secure_filename
 from flask import Blueprint, render_template, request, redirect, url_for, flash, abort, session, current_app
 from app.models import Post, User
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime, timedelta, timezone
 import jwt
+import shutil
 
 from app.decorators import jwt_required
 
@@ -17,24 +19,21 @@ def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 @main.route("/")
-@jwt_required
 def index():
     posts = Post.query.order_by(Post.created_at.desc()).all()
     # Pass the current user to the template
     token = session.get("jwt_token")
-    payload = jwt.decode(token, current_app.config["SECRET_KEY"], algorithms=["HS256"])
-    user_id = payload.get("user_id")
-    user = User.query.get_or_404(user_id)
-    return render_template("index.html", posts=posts, user=user, title="Home")
+    return render_template("index.html", posts=posts, title="Home")
 
 @main.route("/post/<string:post_id>")
-@jwt_required
 def post_detail(post_id):
     post = Post.query.get_or_404(post_id)
     token = session.get("jwt_token")
-    payload = jwt.decode(token, current_app.config["SECRET_KEY"], algorithms=["HS256"])
-    user_id = payload.get("user_id")
-    user = User.query.get_or_404(user_id)
+    user = None
+    if token:
+        payload = jwt.decode(token, current_app.config["SECRET_KEY"], algorithms=["HS256"])
+        user_id = payload.get("user_id")
+        user = User.query.get(user_id)
     post.views_count += 1
     post.save()
     return render_template("post.html", post=post, user=user, title=post.title)
@@ -53,14 +52,27 @@ def new_post():
         cover_image_filename = None
         file = request.files.get("cover_image")
         if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            cover_image_filename = filename
-            upload_path = os.path.join(current_app.config['UPLOAD_FOLDER'], 'images')
-            os.makedirs(upload_path, exist_ok=True)
-            file.save(os.path.join(upload_path, filename))
+            cover_image_filename = f"cover_image_{uuid.uuid4()}"
         
         new_post = Post(title=title, content=content, cover_image=cover_image_filename, user_id=user_id)
         new_post.save()
+
+        post_img_dir = os.path.join(
+            current_app.config['UPLOAD_FOLDER'],
+            'images',
+            str(new_post.id)
+        )
+        os.makedirs(post_img_dir, exist_ok=True)
+
+        if cover_image_filename:
+            file.save(os.path.join(post_img_dir, cover_image_filename))
+
+        # handle all other images
+        for img in request.files.getlist('images'):
+            if img and allowed_file(img.filename):
+                filename = secure_filename(img.filename)
+                img.save(os.path.join(post_img_dir, filename))
+
         flash("Post created successfully!", "success")
         return redirect(url_for("main.index"))
     
@@ -84,9 +96,12 @@ def edit_post(post_id):
         post.content = request.form.get("content")
         file = request.files.get("cover_image")
         if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
+            filename = f"cover_image_{uuid.uuid4()}"
+            if post.cover_image:
+                filename = post.cover_image
+
             post.cover_image = filename
-            upload_path = os.path.join(current_app.config['UPLOAD_FOLDER'], 'images')
+            upload_path = os.path.join(current_app.config['UPLOAD_FOLDER'], 'images', post.id)
             os.makedirs(upload_path, exist_ok=True)
             file.save(os.path.join(upload_path, filename))
         post.save()
@@ -107,7 +122,8 @@ def delete_post(post_id):
     # Ensure the current user is the author of the post
     if post.user_id != user.id:
         abort(403)  # Forbidden access
-
+    
+    shutil.rmtree(os.path.join(current_app.config['UPLOAD_FOLDER'], 'images', post.id))
     post.delete()
 
     flash("Post deleted successfully!", "success")

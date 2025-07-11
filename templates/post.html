@@ -1,7 +1,14 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="container my-5">
-  <div class="row justify-content-center">
+  <div class="row gap-3">
+    <!-- Sidebar (hidden on small screens) -->
+    <nav id="post-toc" class="col-lg-3 d-none d-lg-block">
+      <p class="mb-3 text-center toc-header">Contents</p>
+      <div id="toc"></div>
+    </nav>
+
+    <!-- Main content -->
     <div class="col-lg-8">
       <article class="mb-5">
         <header class="mb-4 text-center">
@@ -13,7 +20,7 @@
         </header>
         {% if post.cover_image %}
         <figure class="mb-4 text-center">
-          <img src="{{ url_for('static', filename='images/' + post.cover_image) }}" class="img-fluid rounded" alt="{{ post.title }}">
+          <img src="{{ url_for('static', filename='images/'+ post.id +'/' + post.cover_image) }}" class="img-fluid rounded" alt="{{ post.title }}">
         </figure>
         {% endif %}
         <div class="d-flex gap-3">
@@ -21,7 +28,7 @@
             By <strong>{{ post.author.username if post.author else 'Unknown' }}</strong> on {{ post.created_at.strftime('%b %d, %Y') }}
           </p>
           <p>|</p>
-          <span class="text-dark m-0 p-0">
+          <span class="text-muted m-0 p-0">
             {% if post.views_count == 1 %}
             <i class="bi bi-eye"></i> Viewed {{ post.views_count }} time
             {% else %}
@@ -30,14 +37,14 @@
           </span>
         </div>
         <hr />
-        <section class="post-content">
+        <section class="post-content markdown-preview-view">
           <!-- The Markdown filter renders the content to HTML -->
-          <div>{{ post.content|markdown }}</div>
+              {{ post.content | md_obsidian(post.id) }}
         </section>
       </article>
       <div class="text-center">
         <a href="{{ url_for('main.index') }}" class="btn btn-secondary">Back to Home</a>
-        {% if post.user_id == user.id %}
+        {% if user.id and post.user_id == user.id %}
         <a href="{{ url_for('main.edit_post', post_id=post.id) }}" class="btn btn-warning">Edit</a>
         <!-- Delete button triggers the modal -->
         <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
@@ -54,7 +61,7 @@
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="deleteModalLabel">Confirm Delete</h5>
+        <p class="modal-title" id="deleteModalLabel">Confirm Delete</p>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -69,4 +76,8 @@
     </div>
   </div>
 </div>
+
+<button id="back-to-top" class="back-to-top-btn" aria-label="Back to top">
+  ↑ Top
+</button>
 {% endblock %}
