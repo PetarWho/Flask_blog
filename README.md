@@ -1,5 +1,5 @@
 ## Description
-This is a simple **Flask** Blog project.
+This is a simple **Flask** Blog project, utilizing Markdown and the Obsidian notebook theme called **Spectrum** by *Wiktoria Mielcarek*.
 
 - You can login or create an account.
 
